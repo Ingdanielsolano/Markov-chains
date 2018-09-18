@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'MainFont';
+    src: url('./mainFont.woff2'); /* IE9 Compat Modes */    
+}
+
+body{
+    font-family: 'MainFont';
+}
