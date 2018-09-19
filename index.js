@@ -1,18 +1,43 @@
+import * as math from 'mathjs'
+
+
+
 var matrix = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 
 function startProcess() {
+
+
+
+    
     matrix[0][0] = Number(document.getElementById("ceroCero").value);
     matrix[0][1] = Number(document.getElementById("ceroUno").value);
-    matrix[0][2] = Number(document.getElementById("ceroDos").value);
-    matrix[0][3] = Number(document.getElementById("r1").value);
-    matrix[1][0] = Number(document.getElementById("unoCero").value);
-    matrix[1][1] = Number(document.getElementById("unoUno").value);
-    matrix[1][2] = Number(document.getElementById("unoDos").value);
-    matrix[1][3] = Number(document.getElementById("r2").value);
-    matrix[2][2] = Number(document.getElementById("tresCero").value);
-    matrix[2][0] = Number(document.getElementById("tresUno").value);
-    matrix[2][1] = Number(document.getElementById("tresDos").value);
-    matrix[2][3] = Number(document.getElementById("r3").value);
+    
+
+    console.log(Number(document.getElementById("ceroCero").value));
+
+    console.log(Number(document.getElementById("ceroUno").value));
+
+    console.log(Number(document.getElementById("ceroDos").value));
+
+    console.log(Number(document.getElementById("r1").value));
+
+    console.log(Number(document.getElementById("unoCero").value));
+
+    console.log(Number(document.getElementById("unoUno").value));
+
+    console.log(Number(document.getElementById("unoDos").value));
+
+    console.log(Number(document.getElementById("r2").value));
+
+    console.log(Number(document.getElementById("dosCero").value));
+
+    console.log(Number(document.getElementById("dosUno").value));
+
+    console.log(Number(document.getElementById("dosDos").value));
+
+    console.log(Number(document.getElementById("r3").value));
+    
+
     let flag = true;
 
     matrix.forEach((value, i) => {
@@ -28,20 +53,40 @@ function startProcess() {
                 flag = false;
             }
         })
-        if (cont > 1) {
-            alert(`The matrix is incorrect because the sum of the row ${i} is more big than 1.`);
-            flag = false;
-        }
-    });    
+        // if (cont > 1) {
+        //     alert(`The matrix is incorrect because the sum of the row ${i} is more big than 1.`);
+        //     flag = false;
+        // }
+    });
     if (flag) {
         console.log();
-
         console.log(matrix);
+        this.getTransposed();
     } else {
         console.log("Some is empty");
     }
 
-    
+}
 
+function getTransposed() {
+    let returnedMatrix = matrix;
+    console.log(matrix);
+
+
+    matrix.forEach((value, i) => {
+        value.forEach((val, j) => {
+            // console.log(`[${i}][${j}]\n`+val);
+            // console.log(`[${i}][${j}]\n`+returnedMatrix[i][j]);
+            if (j < value.length - 1) {
+                returnedMatrix[i][j] = matrix[j][i];
+                console.log(`Changing${i},${j} by ${j},${i}`);
+            }
+        })
+    })
+
+
+    console.log(returnedMatrix);
+
+    console.log("called");
 
 }
