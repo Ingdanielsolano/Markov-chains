@@ -2,7 +2,41 @@
 
 
 
-var matrix = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+var matrix = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+
+
+function addColumns() {
+    var container = document.getElementById("container");
+    var titles = document.getElementById("titles");
+    var input1 = document.createElement("input");    
+    var input2 = document.createElement("input");    
+    var input3 = document.createElement("input");    
+    var td1 = document.createElement("td");
+    var td2 = document.createElement("td");
+    var td3 = document.createElement("td");
+    input1.type = "text";
+    input1.name = "member";
+    input2.type = "text";
+    input2.name = "member";
+    input3.type = "text";
+    input3.name = "member";
+    td1.appendChild(input1);
+    td2.appendChild(input2);
+    td3.appendChild(input3);
+    container.appendChild(td1);
+    container.appendChild(td2);
+    container.appendChild(td3);
+    var th = document.createElement("th");
+    th.scope="col";
+    titles.appendChild(th);
+}
+
+
+
+
+
+
+
 
 function startProcess() {
 
@@ -46,10 +80,39 @@ function startProcess() {
                 this.gauss(ready);
             });
         });
+        //this.powerMatrix(matrix, 1);
     } else {
         //console.log("Some is empty");
     }
 
+}
+
+function powerMatrix(original, power) {
+    var dontChangePls = matrix.concat();
+    var result = matrix.concat();
+    result[0][0] = 12312312;
+    // for (let i = 0; i < original.length; i++) {
+    //     for (let j = 0; j < original[i].length; j++) {
+    //         let sum = 0;
+    //         let sss = "";
+
+    //         for (let h = 0; h < original.length; h++) {
+
+    //             sum += original[i][h] * original[h][j];
+    //             sss += `${original[i][h]}*${original[h][j]} + `;
+    //         }
+    //         result[i][j] = sum;
+    //         sss += " = " + sum;
+    //         console.log("sss");
+    //         console.log(sss);
+    //     }
+    // }
+    console.log(matrix);
+    console.log(dontChangePls);
+    console.log(result);
+
+    // this.showMatrix(original);
+    // this.showMatrix(dontChangePls);
 }
 
 function getTransposed(matrixTemp, callback) {
@@ -78,7 +141,7 @@ function getTransposed(matrixTemp, callback) {
 function adjustMatrix(matrixTemp, callback) {
     let returnedMatrix = matrixTemp;
     for (let ind = 0; ind < returnedMatrix.length; ind++) {
-        returnedMatrix[ind][ind] = (returnedMatrix[ind][ind] - 1).toFixed(1);
+        returnedMatrix[ind][ind] = Number((returnedMatrix[ind][ind] - 1).toFixed(1));
         returnedMatrix[ind].push(0);
     }
     let change = [1, 1, 1, 1]
@@ -90,19 +153,20 @@ function adjustMatrix(matrixTemp, callback) {
 
 
 function showMatrix(mat) {
+    console.log("-------------------------------");
     for (let i = 0; i < mat.length; i++) {
         let row = ""
         for (let j = 0; j < mat[i].length; j++) {
-            row = row + " " + mat[i][j]
+            row = row + " " + mat[i][j].toFixed(4);
         }
         console.log(i + ":" + row);
     }
+    console.log("---------------------------------\n\n\n");
+
 }
 
-function gauss(A) {
+function gauss(A, callback) {
 
-    let gaussResult;
-    let row;
     let pivote = A[0][0];
 
     for (let i = 0; i < A.length; i++) {
@@ -119,32 +183,35 @@ function gauss(A) {
             if (j != i) {
                 //console.log(j + " " + i);
                 if (A[j][i] != 0) {
+                    let principal = A[j][i];
                     //console.log("R"+Number(i+1)+" * " + A[j][0] + " - R" + Number(j+1));
                     for (let k = 0; k < A[j].length; k++) {
-                        let thing = A[j][0] * pivote;
+                        let thing = principal * A[i][k];
                         let result = A[j][k] - thing;
-                        
-                        //console.log(A[j][0]+"*"+pivote+" = "+thing+" - "+A[j][0]+" = "+result);
+                        // console.log("R" + Number(j + 1) + "=\n");
+
+                        // console.log(pivote + "*" + A[j][k] + " = " + thing + " - " + A[j][0] + " = " + result);
                         //console.log(A[j][k]+"*"+pivote+" - R"+j);
 
                         //console.log(A[j][k]);
                         //console.log(A[j][k] * pivote);
 
 
-                        A[j][k] = thing;
+                        A[j][k] = result;
                         //console.log(A[j][k]);
                         //console.log(A[j][k] * pivote);
 
                     }
-                    //console.log(A[j]);
                 }
+
                 //this.showMatrix(A);
             }
+            //this.showMatrix(A);
+            //console.log(A[j]);
         }
     }
-    this.showMatrix(A);
+    //this.showMatrix(A);
     for (let index = 0; index < A.length; index++) {
-        console.log(A[index][A[index].length-1]);            
+        console.log(A[index][A[index].length - 1]);
     }
-
 }
